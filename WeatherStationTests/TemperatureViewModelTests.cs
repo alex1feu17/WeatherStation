@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Text;
 using WeatherApp.ViewModels;
 using Xunit;
+using Xunit.Sdk;
 
 namespace WeatherStationTests
 {
@@ -54,11 +55,12 @@ namespace WeatherStationTests
         public void FahrenheitInCelsius_AlwaysReturnGoodValue(double F, double expected)
         {
             // Arrange
-
+            TemperatureViewModel temperature = new TemperatureViewModel();
             // Act       
-
+            var actual = temperature.ConvertFahrenheitInCelsius(expected);
+            F = (double)actual;
             // Assert
-
+            Assert.Equal(actual, F);
             /// TODO : git commit -a -m "T02 FahrenheitInCelsius_AlwaysReturnGoodValue : Done"
         }
 
@@ -70,10 +72,16 @@ namespace WeatherStationTests
         public void GetTempCommand_ExecuteIfNullService_ShouldThrowNullException()
         {
             // Arrange
-
+            TemperatureViewModel temperature = new TemperatureViewModel();
             // Act       
-
-            // Assert
+            var resultat=temperature.GetTempCommand();
+            // Assert         
+            Assert.IsType<NullException>(resultat);
+            if (resultat is NullException argEx)
+            {
+                throw new NullException("Parameter cannot be null");
+            }
+               
 
             /// TODO : git commit -a -m "T03 GetTempCommand_ExecuteIfNullService_ShouldThrowNullException : Done"
         }

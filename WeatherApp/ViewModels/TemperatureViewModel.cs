@@ -20,5 +20,10 @@ namespace WeatherApp.ViewModels
             actual = actual + 32;
             return actual;
         }
+
+        public object GetTempCommand()
+        {
+            return null;
+        }
     }
 }
