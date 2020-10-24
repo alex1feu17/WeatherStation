@@ -13,5 +13,12 @@ namespace WeatherApp.ViewModels
             actual = actual * (5 / 9);
             return actual;
         }
+
+        public object ConvertFahrenheitInCelsius(double expected)
+        {
+            var actual = expected*(9/5);
+            actual = actual + 32;
+            return actual;
+        }
     }
 }
