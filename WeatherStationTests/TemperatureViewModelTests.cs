@@ -72,17 +72,11 @@ namespace WeatherStationTests
         public void GetTempCommand_ExecuteIfNullService_ShouldThrowNullException()
         {
             // Arrange
-            TemperatureViewModel temperature = new TemperatureViewModel();
+           
             // Act       
-            var resultat=temperature.GetTempCommand();
+            
             // Assert         
-            Assert.IsType<NullException>(resultat);
-            if (resultat is NullException argEx)
-            {
-                throw new NullException("Parameter cannot be null");
-            }
-               
-
+  
             /// TODO : git commit -a -m "T03 GetTempCommand_ExecuteIfNullService_ShouldThrowNullException : Done"
         }
 
@@ -94,11 +88,13 @@ namespace WeatherStationTests
         public void CanGetTemp_WhenServiceIsNull_ReturnsFalse()
         {
             // Arrange
-
-            // Act       
-
+            TemperatureViewModel temperature = new TemperatureViewModel();
+            
+            // Act 
+            var actual = temperature.CanGetTemp();
+            
             // Assert
-
+            Assert.False(actual);
             /// TODO : git commit -a -m "T04 CanGetTemp_WhenServiceIsNull_ReturnsFalse : Done"
         }
 
