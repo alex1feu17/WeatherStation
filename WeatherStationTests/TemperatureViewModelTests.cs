@@ -1,7 +1,11 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading.Tasks;
+using WeatherApp.Models;
+using WeatherApp.Services;
 using WeatherApp.ViewModels;
 using Xunit;
 using Xunit.Sdk;
@@ -13,6 +17,7 @@ namespace WeatherStationTests
         // System Under Test
         // Utilisez ce membre dans les tests
         TemperatureViewModel _sut = new TemperatureViewModel();
+        
 
         /// <summary>
         /// Test la fonctionnalité de conversion de Celsius à Fahrenheit
@@ -72,11 +77,11 @@ namespace WeatherStationTests
         public void GetTempCommand_ExecuteIfNullService_ShouldThrowNullException()
         {
             // Arrange
-           
+
             // Act       
-            
+           
             // Assert         
-  
+
             /// TODO : git commit -a -m "T03 GetTempCommand_ExecuteIfNullService_ShouldThrowNullException : Done"
         }
 
@@ -106,11 +111,15 @@ namespace WeatherStationTests
         public void CanGetTemp_WhenServiceIsSet_ReturnsTrue()
         {
             // Arrange
+            TemperatureViewModel temperature = new TemperatureViewModel();
+            var moq = new Mock<ITemperatureService>();
+            moq.Setup(x => x.GetTempAsync()).Returns( Task.FromResult(new TemperatureModel()));
 
             // Act       
-
+            _sut.SetTemperatureService(moq.Object);
+            var actual = _sut.CanGetTemp();
             // Assert
-
+            Assert.True(actual);
             /// TODO : git commit -a -m "T05 CanGetTemp_WhenServiceIsSet_ReturnsTrue : Done"
         }
 

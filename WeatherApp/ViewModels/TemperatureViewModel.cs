@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using WeatherApp.Commands;
 using WeatherApp.Models;
@@ -18,10 +19,22 @@ namespace WeatherApp.ViewModels
 
         public TemperatureModel CurrentTemp { get; set; }
 
-        public void SetTemperatureService(ITemperatureService service)
+        public TemperatureViewModel()
         {
+            GetTempCommand = new DelegateCommand<string>(Get_tempCommand);
+        }
+
+        private void Get_tempCommand(string obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async void SetTemperatureService(ITemperatureService service)
+        {
+           
+            await service.GetTempAsync();
             TemperatureService = service;
-            
+
         }
 
         public double ConvertCelsiusInFahrenheit(double expected)
