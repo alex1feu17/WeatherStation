@@ -24,10 +24,9 @@ namespace WeatherApp.ViewModels
             GetTempCommand = new DelegateCommand<string>(Get_tempCommand);
         }
 
-        public void Get_tempCommand(string obj)
+        public async void Get_tempCommand(string obj)
         {
-
-           
+            CurrentTemp = await TemperatureService.GetTempAsync();
         }
 
         public async void SetTemperatureService(ITemperatureService service)
