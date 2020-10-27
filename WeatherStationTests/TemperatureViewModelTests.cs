@@ -77,11 +77,14 @@ namespace WeatherStationTests
         public void GetTempCommand_ExecuteIfNullService_ShouldThrowNullException()
         {
             // Arrange
+            TemperatureViewModel temperature = new TemperatureViewModel();
 
-            // Act       
-           
-            // Assert         
-
+            // Act
+            
+            object actual=null;
+            temperature.GetTempCommand.Execute(actual);
+            // Assert  
+            
             /// TODO : git commit -a -m "T03 GetTempCommand_ExecuteIfNullService_ShouldThrowNullException : Done"
         }
 
@@ -131,11 +134,12 @@ namespace WeatherStationTests
         public void SetTemperatureService_WhenExecuted_TemperatureServiceIsNotNull()
         {
             // Arrange
-
+            TemperatureViewModel temperature = new TemperatureViewModel();
+            var moq = new Mock<ITemperatureService>();
             // Act       
-
+            temperature.SetTemperatureService(moq.Object);
             // Assert
-
+            Assert.NotNull(moq);
             /// TODO : git commit -a -m "T06 SetTemperatureService_WhenExecuted_TemperatureServiceIsNotNull : Done"
         }
 
